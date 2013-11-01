@@ -96,6 +96,14 @@ EOF
 elif type sudo >/dev/null 2>&1; then
   echo "Writing a launcher script to $PREFIX/bin/meteor for your convenience."
   echo "This may prompt for your password."
+
+  # New macs (10.9+) don't ship with /usr/local, however it is still in
+  # the default PATH. We still install there, we just need to create the
+  # directory first.
+  if [ ! -d "$PREFIX/bin" ]
+      sudo mkdir -p "$PREFIX/bin" || true
+  fi
+
   if sudo cp "$LAUNCHER" "$PREFIX/bin/meteor"; then
     cat <<"EOF"
 
