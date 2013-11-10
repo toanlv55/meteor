@@ -101,7 +101,8 @@ elif type sudo >/dev/null 2>&1; then
   # the default PATH. We still install there, we just need to create the
   # directory first.
   if [ ! -d "$PREFIX/bin" ] ; then
-      sudo mkdir -p "$PREFIX/bin" || true
+      sudo mkdir -m 755 "$PREFIX" || true
+      sudo mkdir -m 755 "$PREFIX/bin" || true
   fi
 
   if sudo cp "$LAUNCHER" "$PREFIX/bin/meteor"; then
